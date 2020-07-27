@@ -1,0 +1,70 @@
+#importing the dependencies
+import matplotlib.pyplot as plt  #standard plotting library in python
+from sklearn.datasets import load_iris  #importing the iris dataset from sklearn
+iris = load_iris()  #the data is loaded as a python dictionary and stored as object in a variable iris
+
+# we split the data into 4 rows according to feautures and store them in separate variables to be plotted
+# we use the ".T" or the transpose operator to perform this split operation
+features = iris.data.T # variable features stores lists of list of feautures 
+sepal_length = features[0]                               # var sepal_length stores array containg all values of sepal length in the iris dataset
+sepal_width = features[1]                                # var sepal_width stores array containing all values of sepal width in the iris data set
+petal_length = features[2] 
+petal_width = features[3]
+
+# We also store the label name of the species to easily refer to the names while plotting
+sepal_length_label = iris.feature_names[0]
+sepal_width_label = iris.feature_names[1]
+petal_length_label = iris.feature_names[2]
+petal_width_label = iris.feature_names[3]
+
+#an example of plotting 2 features against each other
+plt.scatter( sepal_length , sepal_width , c=iris.target)
+plt.xlabel( sepal_length_label)
+plt.ylabel( sepal_width_label)
+plt.show()
+
+
+
+#importing the dependencies
+import matplotlib.pyplot as plt                            #standard plotting library in python
+from sklearn.model_selection import train_test_split       #this fucntion in sklearn helps split dataset equally into tarining and testing dataset for the ML model
+from sklearn.neighbors import KNeighborsClassifier         # this function in sklearn imports KNN to classify the sample into a catagory based on its 'K' nearest neighbours.
+from sklearn.datasets import load_iris                     #importing the iris dataset from sklearn
+import numpy as np
+iris = load_iris()                                         #the data is loaded as a python dictionary and stored as object in a variable iris
+
+# declaring 4 variables to help train and test the ML model on the divided dataset into Training data and Testing data resp
+X_train , X_test , y_train , y_test = train_test_split(iris['data'], iris['target'], random_state=0) 
+#the data is randomly slpit into testing and training sets by the fucntion that accepts the two parameteres data and target.
+
+#declaring a variable knn to store the KNN fucntion output
+knn = KNeighborsClassifier(n_neighbors=1)    # this function accepts the no of neighbours to analyse before classifying a sample into a catagory
+knn.fit(X_train, y_train)                    #this function  represents a line that best fits all the points (linear regression);parameteres passed:Training data, training target
+X_new = np.array([[5.0,2.9,1.0,0.2]])        # represent new data stored in numpy array
+
+prediction = knn.predict(X_new)
+print(prediction)
+
+#importing the dependencies
+import matplotlib.pyplot as plt                         
+from sklearn.model_selection import train_test_split       
+from sklearn.neighbors import KNeighborsClassifier      
+from sklearn.datasets import load_iris                   
+import numpy as np
+iris = load_iris()   
+
+
+
+# declaring 4 variables to help train and test the ML model on the divided dataset into Training data and Testing data resp
+X_train , X_test , y_train , y_test = train_test_split(iris['data'], iris['target'], random_state=0) 
+#the data is randomly slpit into testing and training sets by the fucntion that accepts the two parameteres data and target.
+
+#declaring a variable knn to store the KNN fucntion output
+knn = KNeighborsClassifier(n_neighbors=1)  
+knn.fit(X_train, y_train)                    
+X_new = np.array([[5.0,2.9,1.0,0.2]])    
+
+print(knn.score(X_test , y_test))
+
+
+
